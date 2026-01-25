@@ -1,0 +1,90 @@
+<!doctype html>
+<html lang="en" >
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>نظام إدارة الطلاب</title>
+    <link rel="stylesheet" href="css/style.css" />
+ 
+  </head>
+  <body>
+    <div class="header row radius">
+      <div class="info row">
+        <span id="email">bilal@gmail.com</span>
+        <span class="pill" id="role">Admin</span>
+      </div>
+      <div class="action">
+        <button class="danger"  type="button">Logout</button>
+      </div>
+    </div>
+    <div class="action-panel radius">
+      <div class="row ">
+        <button class="secondary" type="button">Students</button>
+        <button class="secondary" type="button">Teachers</button>
+        <button class="secondary" type="button">Classes</button>
+        <button class="secondary" type="button">Subjects</button>
+        <button class="secondary" type="button">Grades</button>
+        <button class="secondary" type="button">Departments</button>
+      </div>
+    </div>
+    <div class="showData radius">
+      <div class="row top">
+        <div class="action">
+          <button type="button">Add New <span>Student</span></button>
+        </div>
+        <input type="text" id="search" placeholder="Search">
+      </div>
+      <div class="data">
+        <table>
+          <thead>
+            <th>id</th>
+            <th>name</th>
+            <th>class</th>
+            <th>Action</th>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1</td>
+              <td>bilal</td>
+              <td>bac</td>
+              <td>delete and edite</td>
+              
+            </tr>
+             <tr>
+              <td>1</td>
+              <td>bilal</td>
+              <td>bac</td>
+              <td><div class="action">
+                <button class="secondary" type="button">Update</button>
+                <button class="danger" type="button">delete</button>
+              </div></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="overlay">
+       <div class="panel radius">
+      <span class="cancel" id="cancel">X</span>
+      <label for="UserId">User ID</label>
+      <input type="text" name="UserId">
+      <label for="UserId">Name</label>
+      <input type="text">
+      <label for="UserId">Date Of Birth</label>
+      <input type="date">
+      <label for="Class">Class</label>
+      
+      <select class="dropdown">
+        <option>class 1</option>
+        <option>class 2</option>
+        <option>class 3</option>
+
+      </select>
+      <button type="button">Confirm</button>
+
+    </div>
+    </div>
+   
+    <div class="spinner"></div>
+  </body>
+</html>
