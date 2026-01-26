@@ -29,7 +29,7 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Regis
             {
 
                 UserName = request.Email,
-                Role = Roles.Admin,
+                Role = Roles.User,
                 Email = request.Email
             };
             

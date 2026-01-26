@@ -10,3 +10,4 @@
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/obj/Debug/net10.0/refint/StudentManagement.Domain.dll
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/obj/Debug/net10.0/StudentManagement.Domain.pdb
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/obj/Debug/net10.0/ref/StudentManagement.Domain.dll
+/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/obj/Debug/net10.0/StudentManagement.Domain.sourcelink.json

@@ -13,3 +13,4 @@
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/obj/Debug/net10.0/refint/StudentManagement.Application.dll
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/obj/Debug/net10.0/StudentManagement.Application.pdb
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/obj/Debug/net10.0/ref/StudentManagement.Application.dll
+/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/obj/Debug/net10.0/StudentManagement.Application.sourcelink.json

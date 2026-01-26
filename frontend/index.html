@@ -8,83 +8,54 @@
  
   </head>
   <body>
-    <div class="header row radius">
-      <div class="info row">
-        <span id="email">bilal@gmail.com</span>
-        <span class="pill" id="role">Admin</span>
-      </div>
-      <div class="action">
-        <button class="danger"  type="button">Logout</button>
-      </div>
-    </div>
-    <div class="action-panel radius">
-      <div class="row ">
-        <button class="secondary" type="button">Students</button>
-        <button class="secondary" type="button">Teachers</button>
-        <button class="secondary" type="button">Classes</button>
-        <button class="secondary" type="button">Subjects</button>
-        <button class="secondary" type="button">Grades</button>
-        <button class="secondary" type="button">Departments</button>
-      </div>
-    </div>
-    <div class="showData radius">
-      <div class="row top">
-        <div class="action">
-          <button type="button">Add New <span>Student</span></button>
+    <div class="toast" id="toast"></div>
+    <div class="container" id="auth-container" >
+      <div class="auth radius">
+        <h1 id="form-title">login</h1>
+        <div class="auth-tabs" id="auth-tabs">
+          <button class="secondary" data-filter="Register" type="button">Register</button>
+          <button class="secondary active" data-filter="Login" type="button">Login</button>
         </div>
-        <input type="text" id="search" placeholder="Search">
-      </div>
-      <div class="data">
-        <table>
-          <thead>
-            <th>id</th>
-            <th>name</th>
-            <th>class</th>
-            <th>Action</th>
-          </thead>
-          <tbody>
-            <tr>
-              <td>1</td>
-              <td>bilal</td>
-              <td>bac</td>
-              <td>delete and edite</td>
-              
-            </tr>
-             <tr>
-              <td>1</td>
-              <td>bilal</td>
-              <td>bac</td>
-              <td><div class="action">
-                <button class="secondary" type="button">Update</button>
-                <button class="danger" type="button">delete</button>
-              </div></td>
-            </tr>
-          </tbody>
-        </table>
+        <div class="login-auth form ">
+            <label for="lblEmail">Email</label>
+            <input type="text" name="lblEmail" id="txb-email">
+            <label for="lblPassword">Password</label>
+            <input type="password" name="lblPassword" id="txb-password" >
+        </div>
+        <button id="form-btn"  data-action="Login" type="button">Login</button>
       </div>
     </div>
-    <div class="overlay">
-       <div class="panel radius">
-      <span class="cancel" id="cancel">X</span>
-      <label for="UserId">User ID</label>
-      <input type="text" name="UserId">
-      <label for="UserId">Name</label>
-      <input type="text">
-      <label for="UserId">Date Of Birth</label>
-      <input type="date">
-      <label for="Class">Class</label>
-      
-      <select class="dropdown">
-        <option>class 1</option>
-        <option>class 2</option>
-        <option>class 3</option>
-
-      </select>
-      <button type="button">Confirm</button>
-
-    </div>
+    <div class="school-panel nDisplay" id="school-panel">
+      <div class="header row radius  ">
+        <div class="info row">
+          <span id="email">bilal@gmail.com</span>
+          <span class="pill" id="role">Admin</span>
+        </div>
+        <div class="action">
+          <button class="danger" id="logout"  type="button">Logout</button>
+        </div>
+      </div>
+      <div class="action-panel radius " id="action-panel"></div>
+      <div class="showData radius ">
+        <div class="row top">
+          <div class="action">
+            <button id="add-btn" type="button">Add New <span>Student</span></button>
+          </div>
+          <input type="text" id="search" placeholder="Search">
+        </div>
+        <div class="data" id="data">
+  
+        </div>
+      </div>
+      <div id="overlay" class="overlay nDisplay">
+         <div class="panel radius">
+        <span class="cancel" id="cancel">X</span>
+        <button id="confirm" type="button">Confirm</button>
+      </div>
+      </div>
     </div>
    
-    <div class="spinner"></div>
+    <div class="spinner nDisplay"></div>
+    <script src="script.js" defer></script>
   </body>
 </html>

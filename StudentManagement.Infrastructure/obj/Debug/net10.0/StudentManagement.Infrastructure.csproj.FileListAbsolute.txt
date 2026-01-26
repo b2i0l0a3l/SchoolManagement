@@ -17,3 +17,4 @@
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/obj/Debug/net10.0/StudentManagement.Infrastructure.pdb
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/obj/Debug/net10.0/StudentManagement.Infrastructure.genruntimeconfig.cache
 /home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/obj/Debug/net10.0/ref/StudentManagement.Infrastructure.dll
+/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/obj/Debug/net10.0/StudentManagement.Infrastructure.sourcelink.json
