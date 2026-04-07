@@ -11,7 +11,6 @@ namespace StudentManagement.Application.Features.Messages.Request.command.Studen
 {
     public class AddNewStudentRequest : IRequest<Result<StudentModel>>
     {
-        public string UserId { get; set; } = string.Empty;
         public string FullName { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
         public DateTime EnrollmentDate { get; set; } = DateTime.UtcNow;

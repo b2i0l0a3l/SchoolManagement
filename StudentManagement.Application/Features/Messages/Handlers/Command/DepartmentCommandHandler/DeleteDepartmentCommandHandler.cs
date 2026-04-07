@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+
 using MediatR;
 using StudentManagement.Application.Features.Messages.Request.command.DepartmentCommandRequest;
 using StudentManagement.Domain.Common;

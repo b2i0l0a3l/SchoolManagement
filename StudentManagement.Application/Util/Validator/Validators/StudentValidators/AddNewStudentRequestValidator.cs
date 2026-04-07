@@ -7,8 +7,6 @@ namespace StudentManagement.Application.Util.Validator.Validators.StudentValidat
     {
         public AddNewStudentRequestValidator()
         {
-            RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage("معرف المستخدم مطلوب");
 
             RuleFor(x => x.FullName)
                 .NotEmpty().WithMessage("الاسم الكامل مطلوب")

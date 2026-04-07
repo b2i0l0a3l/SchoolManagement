@@ -12,14 +12,14 @@ namespace StudentManagement.Domain.Entities
     {
         [Key]
         public int Id { get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public string? UserId {get;set;}
         public string FullName { get; set; } = string.Empty;
         public DateTime HireDate { get; set; } = DateTime.UtcNow;
-        [ForeignKey("UserId")]
-        public User? User { get; set; }
         public int DepartmentId { get; set; }
         [ForeignKey("DepartmentId")]
-        public ICollection<Department>? Department { get; set; } 
+        public Department? Department { get; set; } 
+        [ForeignKey("UserId")]
+        public User? User { get; set; }
         public ICollection<TeacherSubject>? TeacherSubjects { get; set; }
     }
 }

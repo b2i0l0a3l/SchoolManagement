@@ -20,11 +20,16 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Teach
         }
         public async Task<Result<bool>> Handle(UpdateTeacherRequest request, CancellationToken cancellationToken)
         {
-            Result<bool> res = await _Repo.Update(request.Id, entity =>
+            var entityResult = await _Repo.GetById(request.Id);
+            if (!entityResult.IsSuccess || entityResult.Value == null)
+                return entityResult.IsSuccess ? Errors.UserNotFoundError : entityResult.Error!;
+
+
+            Result<bool> res = await _Repo.Update(request.Id, x =>
             {
-                entity.FullName = request.FullName;
-                entity.HireDate = request.HireDate;
-                entity.DepartmentId = request.DepartmentId;
+                x.FullName = request.FullName;
+                x.HireDate = request.HireDate;
+                x.DepartmentId = request.DepartmentId;
             });
             
             if (!res.IsSuccess)

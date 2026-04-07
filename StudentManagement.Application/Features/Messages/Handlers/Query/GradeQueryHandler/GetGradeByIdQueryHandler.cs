@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+
 using MediatR;
 using StudentManagement.Application.Features.Messages.Request.Query.GradeQueryRequest;
 using StudentManagement.Domain.Common;
@@ -15,18 +15,23 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Query.GradeQu
     public class GetGradeByIdQueryHandler : IRequestHandler<GetGradeByIdRequest, Result<GradeModel>>
     {
         private readonly IRepository<Grade> _Repo;
-        private readonly IMapper _Mapper;
-        public GetGradeByIdQueryHandler(IRepository<Grade> Repo, IMapper Mapper)
+        public GetGradeByIdQueryHandler(IRepository<Grade> Repo)
         {
             _Repo = Repo;
-            _Mapper = Mapper;
         }
         public async Task<Result<GradeModel>> Handle(GetGradeByIdRequest request, CancellationToken cancellationToken)
         {
             Result<Grade?> result = await _Repo.GetById(request.GradeId);
             if (!result.IsSuccess || result.Value == null)
                 return result.Error!;
-            return _Mapper.Map<GradeModel>(result.Value);
+            return new GradeModel
+            {
+                Id = result.Value.Id,
+                StudentId = result.Value.StudentId,
+                ExamId = result.Value.ExamId,
+                Score = result.Value.Score,
+                CreateAt = result.Value.CreateAt
+            };
         }
     }
 }

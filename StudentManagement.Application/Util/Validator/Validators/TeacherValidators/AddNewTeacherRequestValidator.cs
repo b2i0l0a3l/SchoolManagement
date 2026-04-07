@@ -7,9 +7,6 @@ namespace StudentManagement.Application.Util.Validator.Validators.TeacherValidat
     {
         public AddNewTeacherRequestValidator()
         {
-            RuleFor(x => x.UserId)
-                .NotEmpty().WithMessage("معرف المستخدم مطلوب");
-
             RuleFor(x => x.FullName)
                 .NotEmpty().WithMessage("الاسم الكامل مطلوب")
                 .MaximumLength(100).WithMessage("الاسم لا يتجاوز 100 حرف")

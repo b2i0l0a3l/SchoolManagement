@@ -19,42 +19,15 @@ namespace StudentManagement.Application.Shared
     {
         public static void AddApplicationServiceRegistration(this IServiceCollection service,IConfiguration configuration)
         {
-            service.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-            })
-            .AddJwtBearer(options =>
-            {
-                options.TokenValidationParameters = new TokenValidationParameters
-                {
-                    ValidateIssuer = true,
-                    ValidateAudience = true,
-                    ValidateLifetime = true,
-                    ValidateIssuerSigningKey = true,
-                    ValidIssuer = "StudentApi",
-                    ValidAudience = "StudentApiUsers",
-                    ClockSkew = TimeSpan.FromMinutes(5),
-                    IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(configuration["JWT:Key"]!))
-                };
-            });
+           
             
-            // MediatR
             service.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             
-            // FluentValidation - تسجيل جميع الـ Validators تلقائياً
             service.AddValidatorsFromAssembly(typeof(ApplicationAssemblyMarker).Assembly);
             
-            // ValidationBehavior Pipeline
             service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             
-            service.AddAutoMapper(cfg =>
-            {
-                cfg.AddMaps(typeof(ApplicationAssemblyMarker).Assembly);
-            });
             service.AddScoped<IGenerateJwtToken, GenerateJwtTokenService>();
-            service.AddScoped<IUserRole, UserRole>();
         }
     }
 

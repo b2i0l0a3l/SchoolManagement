@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+
 using MediatR;
 using StudentManagement.Application.Features.Messages.Request.command.GradeCommandRequest;
 using StudentManagement.Domain.Common;
@@ -15,18 +15,32 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Grade
     public class AddNewGradeCommandHandler : IRequestHandler<AddNewGradeRequest, Result<GradeModel>>
     {
         private readonly IRepository<Grade> _Repo;
-        private IMapper _Mapper;
-        public AddNewGradeCommandHandler(IRepository<Grade> Repo, IMapper Mapper)
+        public AddNewGradeCommandHandler(IRepository<Grade> Repo)
         {
             _Repo = Repo;
-            _Mapper = Mapper;
         }
         public async Task<Result<GradeModel>> Handle(AddNewGradeRequest request, CancellationToken cancellationToken)
         {
-            Result<Grade> result = await _Repo.Add(_Mapper.Map<Grade>(request));
+            var gradeEntity = new Grade
+            {
+                StudentId = request.StudentId,
+                ExamId = request.ExamId,
+                Score = request.Score,
+                CreateAt = request.CreateAt
+            };
+
+            Result<Grade> result = await _Repo.Add(gradeEntity);
             if (!result.IsSuccess)
                 return result.Error!;
-            return _Mapper.Map<GradeModel>(result.Value);
+            
+            return new GradeModel
+            {
+                Id = result.Value!.Id,
+                StudentId = result.Value.StudentId,
+                ExamId = result.Value.ExamId,
+                Score = result.Value.Score,
+                CreateAt = result.Value.CreateAt
+            };
         }
     }
 }

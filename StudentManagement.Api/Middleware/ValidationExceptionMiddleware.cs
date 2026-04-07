@@ -27,7 +27,7 @@ namespace StudentManagement.Api.Middleware
                 var response = new
                 {
                     Type = "ValidationError",
-                    Title = "حدثت أخطاء في التحقق من البيانات",
+                    Title = "an error occurred during validation",
                     Status = (int)HttpStatusCode.BadRequest,
                     Errors = ex.Errors
                 };

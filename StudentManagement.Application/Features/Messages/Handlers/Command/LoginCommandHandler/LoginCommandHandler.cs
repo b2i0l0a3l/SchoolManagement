@@ -17,11 +17,11 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Login
     public class LoginCommandHandler : IRequestHandler<LoginCommandRequest, Result<LoginModel>>
     {
         private readonly UserManager<User> _Manager;
-        private readonly IUserRole _u;
-        public LoginCommandHandler(IUserRole u,UserManager<User> manager)
+        private readonly IGenerateJwtToken _JwtService;
+        public LoginCommandHandler(UserManager<User> manager, IGenerateJwtToken jwtService)
         {
             _Manager = manager;
-            _u = u;
+            _JwtService = jwtService;
         }
         public async Task<Result<LoginModel>> Handle(LoginCommandRequest request, CancellationToken cancellationToken)
         {
@@ -30,10 +30,17 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Login
 
             if (!await _Manager.CheckPasswordAsync(existing, request.Password))
                 return new Error("InvalidCredentialsError", ErrorType.Validation, "Invalid credentials");
+            Claim[] claims = new []
+            {
+                new Claim(ClaimTypes.NameIdentifier, existing.Id.ToString()),
+                new Claim(ClaimTypes.Email, request.Email),
+                new Claim(ClaimTypes.Role, existing.Role.ToString())
+            };
 
-            Result<string> AccessToken = await _u.AddRoleToUserAndGenerateJwtKey(existing, existing.Role ?? Roles.User);
+            Result<string> AccessToken = _JwtService.GenerateJwtToken(claims);
             if (!AccessToken.IsSuccess || string.IsNullOrEmpty(AccessToken.Value)) return new Error("InternalServerError", ErrorType.General, "Error Happend By Generating Jwt Token.");
             return new LoginModel() { AccessKey = AccessToken.Value };
         }
     }
+
 }

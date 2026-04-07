@@ -20,12 +20,18 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Grade
         }
         public async Task<Result<bool>> Handle(UpdateGradeRequest request, CancellationToken cancellationToken)
         {
-            Result<bool> res = await _Repo.Update(request.Id, entity =>
+            var entityResult = await _Repo.GetById(request.Id);
+            if (!entityResult.IsSuccess || entityResult.Value == null)
+                return entityResult.IsSuccess ? Errors.UserNotFoundError : entityResult.Error!;
+
+
+            Result<bool> res = await _Repo.Update(request.Id, x =>
             {
-                entity.StudentId = request.StudentId;
-                entity.SubjectId = request.SubjectId;
-                entity.Score = request.Score;
-                entity.CreateAt = request.CreateAt;
+                x.StudentId = request.StudentId;
+                x.ExamId = request.ExamId;
+                x.Score = request.Score;
+                x.CreateAt = request.CreateAt;
+                
             });
             
             if (!res.IsSuccess)

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Api/StudentManagement.Api.csproj": {}
+    "/home/fatma/سطح المكتب/school/StudentManagement.Api/StudentManagement.Api.csproj": {}
   },
   "projects": {
-    "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Api/StudentManagement.Api.csproj": {
+    "/home/fatma/سطح المكتب/school/StudentManagement.Api/StudentManagement.Api.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Api/StudentManagement.Api.csproj",
+        "projectUniqueName": "/home/fatma/سطح المكتب/school/StudentManagement.Api/StudentManagement.Api.csproj",
         "projectName": "StudentManagement.Api",
-        "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Api/StudentManagement.Api.csproj",
+        "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Api/StudentManagement.Api.csproj",
         "packagesPath": "/home/fatma/.nuget/packages/",
-        "outputPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Api/obj/",
+        "outputPath": "/home/fatma/سطح المكتب/school/StudentManagement.Api/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -27,11 +27,11 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj": {
-                "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj"
+              "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj": {
+                "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj"
               },
-              "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj": {
-                "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj"
+              "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj": {
+                "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj"
               }
             }
           }
@@ -55,10 +55,6 @@
             "Microsoft.AspNetCore.OpenApi": {
               "target": "Package",
               "version": "[10.0.2, )"
-            },
-            "Microsoft.AspNetCore.RateLimiting": {
-              "target": "Package",
-              "version": "[7.0.0-rc.2.22476.2, )"
             },
             "Swashbuckle.AspNetCore": {
               "target": "Package",
@@ -92,7 +88,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.AspNetCore": "(,10.0.32767]",
             "Microsoft.AspNetCore.Antiforgery": "(,10.0.32767]",
@@ -510,14 +506,14 @@
         }
       }
     },
-    "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj": {
+    "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj",
+        "projectUniqueName": "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj",
         "projectName": "StudentManagement.Application",
-        "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj",
+        "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj",
         "packagesPath": "/home/fatma/.nuget/packages/",
-        "outputPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/obj/",
+        "outputPath": "/home/fatma/سطح المكتب/school/StudentManagement.Application/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -533,8 +529,8 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj": {
-                "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj"
+              "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj": {
+                "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj"
               }
             }
           }
@@ -596,7 +592,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -874,14 +870,14 @@
         }
       }
     },
-    "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj": {
+    "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj",
+        "projectUniqueName": "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj",
         "projectName": "StudentManagement.Domain",
-        "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj",
+        "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj",
         "packagesPath": "/home/fatma/.nuget/packages/",
-        "outputPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/obj/",
+        "outputPath": "/home/fatma/سطح المكتب/school/StudentManagement.Domain/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -915,10 +911,6 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
-            "AutoMapper": {
-              "target": "Package",
-              "version": "[16.0.0, )"
-            },
             "Microsoft.AspNetCore.Identity.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.2, )"
@@ -940,7 +932,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",
@@ -1218,14 +1210,14 @@
         }
       }
     },
-    "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj": {
+    "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj",
+        "projectUniqueName": "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj",
         "projectName": "StudentManagement.Infrastructure",
-        "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj",
+        "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/StudentManagement.Infrastructure.csproj",
         "packagesPath": "/home/fatma/.nuget/packages/",
-        "outputPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Infrastructure/obj/",
+        "outputPath": "/home/fatma/سطح المكتب/school/StudentManagement.Infrastructure/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "/home/fatma/.nuget/NuGet/NuGet.Config"
@@ -1241,11 +1233,11 @@
           "net10.0": {
             "targetAlias": "net10.0",
             "projectReferences": {
-              "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj": {
-                "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Application/StudentManagement.Application.csproj"
+              "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj": {
+                "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Application/StudentManagement.Application.csproj"
               },
-              "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj": {
-                "projectPath": "/home/fatma/سطح المكتب/firstproject/studentApi/StudentManagement.Domain/StudentManagement.Domain.csproj"
+              "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj": {
+                "projectPath": "/home/fatma/سطح المكتب/school/StudentManagement.Domain/StudentManagement.Domain.csproj"
               }
             }
           }
@@ -1266,6 +1258,10 @@
         "net10.0": {
           "targetAlias": "net10.0",
           "dependencies": {
+            "Dapper": {
+              "target": "Package",
+              "version": "[2.1.72, )"
+            },
             "Microsoft.EntityFrameworkCore": {
               "target": "Package",
               "version": "[10.0.2, )"
@@ -1303,7 +1299,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.100/PortableRuntimeIdentifierGraph.json",
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/10.0.104/PortableRuntimeIdentifierGraph.json",
           "packagesToPrune": {
             "Microsoft.CSharp": "(,4.7.32767]",
             "Microsoft.VisualBasic": "(,10.4.32767]",

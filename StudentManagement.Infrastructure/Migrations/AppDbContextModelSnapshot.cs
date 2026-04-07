@@ -154,6 +154,66 @@ namespace StudentManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUserTokens", (string)null);
                 });
 
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Attendance", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Remarks")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("Status")
+                        .HasColumnType("integer");
+
+                    b.Property<int>("StudentId")
+                        .HasColumnType("integer");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("StudentId");
+
+                    b.ToTable("Attendances");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.AuditLog", b =>
+                {
+                    b.Property<Guid>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("uuid");
+
+                    b.Property<DateTime>("CreatedAt")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<string>("Endpoint")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("IpAddress")
+                        .HasColumnType("text");
+
+                    b.Property<string>("Method")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("StatusCode")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("UserId")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("AuditLogs");
+                });
+
             modelBuilder.Entity("StudentManagement.Domain.Entities.Class", b =>
                 {
                     b.Property<int>("Id")
@@ -183,9 +243,6 @@ namespace StudentManagement.Infrastructure.Migrations
 
                     NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
 
-                    b.Property<int?>("DepartmentId")
-                        .HasColumnType("integer");
-
                     b.Property<string>("Name")
                         .IsRequired()
                         .HasMaxLength(30)
@@ -193,9 +250,35 @@ namespace StudentManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("DepartmentId");
-
                     b.ToTable("Departments");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Exam", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<DateTime>("Date")
+                        .HasColumnType("timestamp with time zone");
+
+                    b.Property<float>("MaxScore")
+                        .HasColumnType("real");
+
+                    b.Property<int>("SubjectId")
+                        .HasColumnType("integer");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("SubjectId");
+
+                    b.ToTable("Exams");
                 });
 
             modelBuilder.Entity("StudentManagement.Domain.Entities.Grade", b =>
@@ -209,13 +292,13 @@ namespace StudentManagement.Infrastructure.Migrations
                     b.Property<DateTime>("CreateAt")
                         .HasColumnType("timestamp with time zone");
 
+                    b.Property<int>("ExamId")
+                        .HasColumnType("integer");
+
                     b.Property<float>("Score")
                         .HasColumnType("real");
 
                     b.Property<int>("StudentId")
-                        .HasColumnType("integer");
-
-                    b.Property<int>("SubjectId")
                         .HasColumnType("integer");
 
                     b.Property<DateTime>("UpdateAt")
@@ -223,11 +306,38 @@ namespace StudentManagement.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
+                    b.HasIndex("ExamId");
+
                     b.HasIndex("StudentId");
 
-                    b.HasIndex("SubjectId");
-
                     b.ToTable("Grades");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Parent", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("integer");
+
+                    NpgsqlPropertyBuilderExtensions.UseIdentityByDefaultColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("FullName")
+                        .IsRequired()
+                        .HasMaxLength(40)
+                        .HasColumnType("character varying(40)");
+
+                    b.Property<string>("PhoneNumber")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("UserId")
+                        .HasColumnType("text");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("UserId");
+
+                    b.ToTable("Parents");
                 });
 
             modelBuilder.Entity("StudentManagement.Domain.Entities.Student", b =>
@@ -255,13 +365,17 @@ namespace StudentManagement.Infrastructure.Migrations
                     b.Property<int>("Gender")
                         .HasColumnType("integer");
 
+                    b.Property<int?>("ParentId")
+                        .HasColumnType("integer");
+
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
 
                     b.HasIndex("ClassId");
+
+                    b.HasIndex("ParentId");
 
                     b.HasIndex("UserId");
 
@@ -308,10 +422,11 @@ namespace StudentManagement.Infrastructure.Migrations
                         .HasColumnType("timestamp with time zone");
 
                     b.Property<string>("UserId")
-                        .IsRequired()
                         .HasColumnType("text");
 
                     b.HasKey("Id");
+
+                    b.HasIndex("DepartmentId");
 
                     b.HasIndex("UserId");
 
@@ -414,6 +529,28 @@ namespace StudentManagement.Infrastructure.Migrations
                     b.ToTable("AspNetUsers", (string)null);
                 });
 
+            modelBuilder.Entity("StudentManagement.Domain.Models.StudentGradeModel", b =>
+                {
+                    b.Property<string>("classname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<string>("fullname")
+                        .IsRequired()
+                        .HasColumnType("text");
+
+                    b.Property<int>("gender")
+                        .HasColumnType("integer");
+
+                    b.Property<float>("grade")
+                        .HasColumnType("real");
+
+                    b.Property<int>("studentid")
+                        .HasColumnType("integer");
+
+                    b.ToTable("StudentGrades");
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole", null)
@@ -465,32 +602,54 @@ namespace StudentManagement.Infrastructure.Migrations
                         .IsRequired();
                 });
 
-            modelBuilder.Entity("StudentManagement.Domain.Entities.Department", b =>
-                {
-                    b.HasOne("StudentManagement.Domain.Entities.Teacher", "Teacher")
-                        .WithMany("Department")
-                        .HasForeignKey("DepartmentId");
-
-                    b.Navigation("Teacher");
-                });
-
-            modelBuilder.Entity("StudentManagement.Domain.Entities.Grade", b =>
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Attendance", b =>
                 {
                     b.HasOne("StudentManagement.Domain.Entities.Student", "Student")
-                        .WithMany("Grades")
+                        .WithMany()
                         .HasForeignKey("StudentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Exam", b =>
+                {
                     b.HasOne("StudentManagement.Domain.Entities.Subject", "Subject")
                         .WithMany()
                         .HasForeignKey("SubjectId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Student");
-
                     b.Navigation("Subject");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Grade", b =>
+                {
+                    b.HasOne("StudentManagement.Domain.Entities.Exam", "Exam")
+                        .WithMany("Grades")
+                        .HasForeignKey("ExamId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("StudentManagement.Domain.Entities.Student", "Student")
+                        .WithMany("Grades")
+                        .HasForeignKey("StudentId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("Exam");
+
+                    b.Navigation("Student");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Parent", b =>
+                {
+                    b.HasOne("StudentManagement.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentManagement.Domain.Entities.Student", b =>
@@ -501,24 +660,34 @@ namespace StudentManagement.Infrastructure.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("StudentManagement.Domain.Entities.Parent", "Parent")
+                        .WithMany("Students")
+                        .HasForeignKey("ParentId");
+
                     b.HasOne("StudentManagement.Domain.Entities.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
+                        .HasForeignKey("UserId");
 
                     b.Navigation("Class");
+
+                    b.Navigation("Parent");
 
                     b.Navigation("User");
                 });
 
             modelBuilder.Entity("StudentManagement.Domain.Entities.Teacher", b =>
                 {
-                    b.HasOne("StudentManagement.Domain.Entities.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId")
+                    b.HasOne("StudentManagement.Domain.Entities.Department", "Department")
+                        .WithMany("Teachers")
+                        .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("StudentManagement.Domain.Entities.User", "User")
+                        .WithMany()
+                        .HasForeignKey("UserId");
+
+                    b.Navigation("Department");
 
                     b.Navigation("User");
                 });
@@ -557,6 +726,21 @@ namespace StudentManagement.Infrastructure.Migrations
                     b.Navigation("teacherSubjects");
                 });
 
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Department", b =>
+                {
+                    b.Navigation("Teachers");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Exam", b =>
+                {
+                    b.Navigation("Grades");
+                });
+
+            modelBuilder.Entity("StudentManagement.Domain.Entities.Parent", b =>
+                {
+                    b.Navigation("Students");
+                });
+
             modelBuilder.Entity("StudentManagement.Domain.Entities.Student", b =>
                 {
                     b.Navigation("Grades");
@@ -569,8 +753,6 @@ namespace StudentManagement.Infrastructure.Migrations
 
             modelBuilder.Entity("StudentManagement.Domain.Entities.Teacher", b =>
                 {
-                    b.Navigation("Department");
-
                     b.Navigation("TeacherSubjects");
                 });
 #pragma warning restore 612, 618

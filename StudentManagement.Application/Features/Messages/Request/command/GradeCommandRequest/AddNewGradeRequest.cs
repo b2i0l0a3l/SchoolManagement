@@ -11,7 +11,7 @@ namespace StudentManagement.Application.Features.Messages.Request.command.GradeC
     public class AddNewGradeRequest : IRequest<Result<GradeModel>>
     {
         public int StudentId { get; set; }
-        public int SubjectId { get; set; }
+        public int ExamId { get; set; }
         public float Score { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;
     }

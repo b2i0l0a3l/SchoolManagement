@@ -1,0 +1,144 @@
+nohup: ignoring input
+Using launch settings from /home/fatma/سطح المكتب/school/StudentManagement.Api/Properties/launchSettings.json...
+Building...
+info: Microsoft.Hosting.Lifetime[14]
+      Now listening on: http://localhost:5017
+info: Microsoft.Hosting.Lifetime[0]
+      Application started. Press Ctrl+C to shut down.
+info: Microsoft.Hosting.Lifetime[0]
+      Hosting environment: Development
+info: Microsoft.Hosting.Lifetime[0]
+      Content root path: /home/fatma/سطح المكتب/school/StudentManagement.Api
+warn: Microsoft.AspNetCore.HttpsPolicy.HttpsRedirectionMiddleware[3]
+      Failed to determine the https port for redirect.
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (99ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT e."Id", e."Date", e."MaxScore", e."SubjectId", e."Title"
+      FROM "Exams" AS e
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Exam/GetAll responded 404  time: 7 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (34ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT e."Id", e."Date", e."MaxScore", e."SubjectId", e."Title"
+      FROM "Exams" AS e
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Exam/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."ClassId", s."DateOfBirth", s."EnrollmentDate", s."FullName", s."Gender", s."ParentId", s."UserId"
+      FROM "Students" AS s
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Student/GetAllStudents responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."DepartmentId", t."FullName", t."HireDate", t."UserId"
+      FROM "Teachers" AS t
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Teacher/GetAllTeachers responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (195ms) [Parameters=[@p0='?', @p1='?', @p2='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "Parents" ("FullName", "PhoneNumber", "UserId")
+      VALUES (@p0, @p1, @p2)
+      RETURNING "Id";
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (180ms) [Parameters=[@p0='?' (DbType = Guid), @p1='?' (DbType = DateTime), @p2='?', @p3='?', @p4='?', @p5='?' (DbType = Int32), @p6='?'], CommandType='Text', CommandTimeout='30']
+      INSERT INTO "AuditLogs" ("Id", "CreatedAt", "Endpoint", "IpAddress", "Method", "StatusCode", "UserId")
+      VALUES (@p0, @p1, @p2, @p3, @p4, @p5, @p6);
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request POST /api/Parent/AddParent responded 200  time: 1 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (10ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."ClassName", c."Year"
+      FROM "Classes" AS c
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Class/GetAllClasses responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT e."Id", e."Date", e."MaxScore", e."SubjectId", e."Title"
+      FROM "Exams" AS e
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Exam/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT e."Id", e."Date", e."MaxScore", e."SubjectId", e."Title"
+      FROM "Exams" AS e
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Exam/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."ClassName", c."Year"
+      FROM "Classes" AS c
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Class/GetAllClasses responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT p."Id", p."FullName", p."PhoneNumber", p."UserId"
+      FROM "Parents" AS p
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Parent/GetAll responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT t."Id", t."DepartmentId", t."FullName", t."HireDate", t."UserId"
+      FROM "Teachers" AS t
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Teacher/GetAllTeachers responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT s."Id", s."ClassId", s."DateOfBirth", s."EnrollmentDate", s."FullName", s."Gender", s."ParentId", s."UserId"
+      FROM "Students" AS s
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Student/GetAllStudents responded 200  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT a."Id", a."Date", a."Remarks", a."Status", a."StudentId"
+      FROM "Attendances" AS a
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Attendance/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT a."Id", a."Date", a."Remarks", a."Status", a."StudentId"
+      FROM "Attendances" AS a
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Attendance/GetAll responded 404  time: 0 seconds
+info: Microsoft.EntityFrameworkCore.Database.Command[20101]
+      Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+      SELECT c."Id", c."ClassName", c."Year"
+      FROM "Classes" AS c
+info: StudentManagement.Api.Middleware.AuditMiddleware[0]
+      Request GET /api/Class/GetAllClasses responded 200  time: 0 seconds

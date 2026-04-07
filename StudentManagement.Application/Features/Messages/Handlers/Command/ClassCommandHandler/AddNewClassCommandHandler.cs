@@ -2,7 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using AutoMapper;
+
 using MediatR;
 using StudentManagement.Application.Features.Messages.Request.command.ClassCommandRequest;
 using StudentManagement.Domain.Common;
@@ -18,19 +18,29 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Class
 
     {
         private readonly IRepository<Class> _Repo;
-        private IMapper _Mapper;
-        public AddNewClassCommandHandler(IRepository<Class> Repo,IMapper Mapper)
+        public AddNewClassCommandHandler(IRepository<Class> Repo)
         {
             _Repo = Repo;
-            _Mapper = Mapper;
             
         }
         public async Task<Result<ClassModel>> Handle(AddNewClassRequest request, CancellationToken cancellationToken)
         {
-            Result<Class> result = await _Repo.Add(_Mapper.Map<Class>(request));
+            var classEntity = new Class
+            {
+                ClassName = request.ClassName,
+                Year = request.Year
+            };
+
+            Result<Class> result = await _Repo.Add(classEntity);
             if (!result.IsSuccess)
                 return result.Error!;
-            return _Mapper.Map<ClassModel>(result.Value);
+            
+            return new ClassModel
+            {
+                Id = result.Value!.Id,
+                ClassName = result.Value.ClassName,
+                Year = result.Value.Year
+            };
         }
     }
 }

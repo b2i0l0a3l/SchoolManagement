@@ -15,9 +15,9 @@ namespace StudentManagement.Domain.Entities
         public int StudentId { get; set; }
         [ForeignKey("StudentId")]
         public Student? Student { get; set; }
-        public int SubjectId { get; set; }
-        [ForeignKey("SubjectId")]
-        public Subject? Subject { get; set; }
+        public int ExamId { get; set; }
+        [ForeignKey("ExamId")]
+        public Exam? Exam { get; set; }
         public float Score { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.UtcNow;
         public DateTime UpdateAt { get; set; } = DateTime.UtcNow;

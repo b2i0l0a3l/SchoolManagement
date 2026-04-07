@@ -13,6 +13,6 @@ namespace StudentManagement.Domain.Entities
         public int Id { get; set; }
         [MaxLength(30)]
         public string Name { get; set; } = string.Empty;
-        public Teacher? Teacher { get; set; }
+        public ICollection<Teacher>? Teachers { get; set; }
     }
 }

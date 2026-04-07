@@ -10,7 +10,6 @@ namespace StudentManagement.Application.Features.Messages.Request.command.Teache
 {
     public class AddNewTeacherRequest : IRequest<Result<TeacherModel>>
     {
-        public string UserId { get; set; } = string.Empty;
         public string FullName { get; set; } = string.Empty;
         public DateTime HireDate { get; set; } = DateTime.UtcNow;
         public int DepartmentId { get; set; }

@@ -12,7 +12,7 @@ namespace StudentManagement.Application.Features.Messages.Request.command.GradeC
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int SubjectId { get; set; }
+        public int ExamId { get; set; }
         public float Score { get; set; }
         public DateTime CreateAt { get; set; } = DateTime.Now;
     }

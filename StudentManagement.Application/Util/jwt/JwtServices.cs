@@ -12,13 +12,13 @@ namespace StudentManagement.Application.Util.jwt
 {
     public interface IGenerateJwtToken
     {
-        string GenerateJwtToken(List<Claim> claims);
+        string GenerateJwtToken(Claim[] claims);
     }
     public class GenerateJwtTokenService : IGenerateJwtToken
     {
         private readonly IConfiguration _config;
         public GenerateJwtTokenService(IConfiguration config) => _config = config;
-        public string GenerateJwtToken(List<Claim> claims)
+        public string GenerateJwtToken(Claim[] claims)
         {
             var key = new SymmetricSecurityKey(
                 Encoding.UTF8.GetBytes(_config["JWT:Key"]!));

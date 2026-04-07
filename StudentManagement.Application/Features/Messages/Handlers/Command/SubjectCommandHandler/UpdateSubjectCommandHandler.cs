@@ -20,10 +20,16 @@ namespace StudentManagement.Application.Features.Messages.Handlers.Command.Subje
         }
         public async Task<Result<bool>> Handle(UpdateSubjectRequest request, CancellationToken cancellationToken)
         {
-            Result<bool> res = await _Repo.Update(request.Id, entity =>
+            var entityResult = await _Repo.GetById(request.Id);
+            if (!entityResult.IsSuccess || entityResult.Value == null)
+                return entityResult.IsSuccess ? Errors.UserNotFoundError : entityResult.Error!;
+
+
+            Result<bool> res = await _Repo.Update(request.Id, x =>
             {
-                entity.SubjectName = request.SubjectName;
-                entity.CreatAt = request.CreatAt;
+                x.SubjectName = request.SubjectName;
+                x.CreatAt = request.CreatAt;
+            
             });
             
             if (!res.IsSuccess)

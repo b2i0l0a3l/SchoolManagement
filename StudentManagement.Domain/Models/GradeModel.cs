@@ -9,7 +9,7 @@ namespace StudentManagement.Domain.Models
     {
         public int Id { get; set; }
         public int StudentId { get; set; }
-        public int SubjectId { get; set; }
+        public int ExamId { get; set; }
         public float Score { get; set; }
         public DateTime CreateAt { get; set; }
     }

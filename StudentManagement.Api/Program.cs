@@ -1,9 +1,14 @@
 
-using System.Threading.RateLimiting;
-using Microsoft.AspNetCore.RateLimiting;
+using System.Text;
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
+using Microsoft.IdentityModel.Tokens;
 using Microsoft.OpenApi;
 using StudentManagement.Api.Middleware;
 using StudentManagement.Application.Shared;
+using StudentManagement.Domain.Entities;
+using StudentManagement.Infrastructure.Presistence;
 using StudentManagement.Infrastructure.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -12,44 +17,52 @@ builder.Services.AddCors(options =>
 {
     options.AddPolicy("AllowFrontend", policy =>
     {
-        policy.SetIsOriginAllowed(origin => new Uri(origin).Host == "localhost" || new Uri(origin).Host == "127.0.0.1")
+        policy.WithOrigins("http://localhost:3000", "http://127.0.0.1:3000")
               .AllowAnyHeader()
               .AllowAnyMethod()
               .AllowCredentials();
     });
 });
 
-builder.Services.AddRateLimiter(options =>
-{
-    options.AddFixedWindowLimiter("FixedPolicy", opt =>
-    {
-        opt.Window = TimeSpan.FromMinutes(1);    
-        opt.PermitLimit = 100;                   
-        opt.QueueLimit = 2;
-        opt.QueueProcessingOrder = QueueProcessingOrder.OldestFirst;
-        
-        options.AddSlidingWindowLimiter("SlidingPolicy", opt =>
-        {
-            opt.Window = TimeSpan.FromMinutes(1);
-            opt.PermitLimit = 100;
-            opt.SegmentsPerWindow = 4;
-        });
-        options.AddConcurrencyLimiter("ConcurrencyPolicy", opt =>
-        {
-            opt.PermitLimit = 10;
-        });
-    });
-});
 
 builder.Services.AddControllers();
 
 
+builder.Services.AddDbContext<AppDbContext>(options =>
+                options.UseNpgsql(builder.Configuration.GetConnectionString("DefaultConnection")));
 
-builder.Services.AddInfrastructurServiceRegistration(builder.Configuration);
-builder.Services.AddApplicationServiceRegistration(builder.Configuration);
-
-
-
+builder.Services.AddIdentity<User, IdentityRole>(options =>
+{
+    options.Password.RequireDigit = true;
+    options.Password.RequiredLength = 8;
+    options.Password.RequireNonAlphanumeric = false;
+    options.Password.RequireUppercase = true;
+    options.Password.RequireLowercase = true;
+    options.User.RequireUniqueEmail = true;
+    options.Lockout.MaxFailedAccessAttempts = 5;
+})
+.AddEntityFrameworkStores<AppDbContext>()
+.AddDefaultTokenProviders();
+       builder.Services.AddAuthentication(options =>
+            {
+                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+            })
+            .AddJwtBearer(options =>
+            {
+                options.TokenValidationParameters = new TokenValidationParameters
+                {
+                    ValidateIssuer = true,
+                    ValidateAudience = true,
+                    ValidateLifetime = true,
+                    ValidateIssuerSigningKey = true,
+                    ValidIssuer = "StudentApi",
+                    ValidAudience = "StudentApiUsers",
+                    ClockSkew = TimeSpan.FromMinutes(5),
+                    IssuerSigningKey = new SymmetricSecurityKey(
+                    Encoding.UTF8.GetBytes(builder.Configuration["JWT:Key"]!))
+                };
+            });      
 builder.Services.AddAuthorization();
 builder.Services.AddEndpointsApiExplorer();
 
@@ -66,7 +79,7 @@ builder.Services.AddSwaggerGen(c =>
             Contact = new OpenApiContact
             {
                 Name = "Bilal",
-                Email = "belamraoui92@gmail.com"
+                Email = "belamraoui21@gmail.com"
             },
             License = new OpenApiLicense
             {
@@ -89,14 +102,15 @@ builder.Services.AddSwaggerGen(c =>
     });
 });
 
+builder.Services.AddInfrastructurServiceRegistration(builder.Configuration);
+builder.Services.AddApplicationServiceRegistration(builder.Configuration);
 
 
 var app = builder.Build();
-
+app.UseHttpsRedirection();
+app.UseValidationExceptionHandler();
 app.UseCors("AllowFrontend");
 
-// معالجة أخطاء التحقق من البيانات
-app.UseValidationExceptionHandler();
 
 if (app.Environment.IsDevelopment())
 {
@@ -109,9 +123,8 @@ if (app.Environment.IsDevelopment())
     });
 }
 
-app.UseHttpsRedirection();
-app.UseRateLimiter();
 app.UseAuthentication();
 app.UseAuthorization();
+app.UseMiddleware<AuditMiddleware>();
 app.MapControllers();
 app.Run();

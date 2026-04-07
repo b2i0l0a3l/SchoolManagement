@@ -13,7 +13,7 @@ namespace StudentManagement.Domain.Entities
     {
         [Key]
         public int Id{ get; set; }
-        public string UserId { get; set; } = string.Empty;
+        public string? UserId {get;set;}
         [MaxLength(40)]
         public string FullName { get; set; } = string.Empty;
         public DateTime DateOfBirth { get; set; }
@@ -22,10 +22,12 @@ namespace StudentManagement.Domain.Entities
         public int ClassId { get; set; }
         [ForeignKey("ClassId")]
         public Class? Class { get; set; }
-
-
         [ForeignKey("UserId")]
         public User? User { get; set; }
+        public int? ParentId { get; set; }
+        [ForeignKey("ParentId")]
+        public Parent? Parent { get; set; }
+
         public ICollection<Grade>? Grades { get; set; }
     }
 }
