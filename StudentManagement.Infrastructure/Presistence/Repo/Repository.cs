@@ -3,6 +3,7 @@ using Microsoft.EntityFrameworkCore;
 using StudentManagement.Infrastructure.Presistence;
 using StudentManagement.Domain.Common;
 using StudentManagement.Domain.Interfaces;
+using StudentManagement.Domain.common;
 
 namespace StoreSystem.Infrastructure.Persistence.Repo
 {
@@ -75,13 +76,20 @@ namespace StoreSystem.Infrastructure.Persistence.Repo
             }
         }
         
-        public async Task<Result<IEnumerable<T>?>> GetِAllByCondition(Expression<Func<T, bool>> exp)
+        public async Task<Result<PagedResult<T?>>> GetِAllByCondition(int pageNumber, int pageSize,Expression<Func<T, bool>> exp)
         {
             try
             {
-                var result = await _Set.Where(exp).ToListAsync();
+                int totalItems = await _Set.CountAsync(exp);
+                var result = await _Set.Where(exp).Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
                 if (result == null) return new Error("GetFaild",StudentManagement.Domain.Common.ErrorType.NotFound, "Entity Not Found");
-                return result;
+                return new PagedResult<T?>
+                {
+                    Items = result,
+                    TotalItems = totalItems,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };
             }catch
             {
                 return new Error("GetFaild", StudentManagement.Domain.Common.ErrorType.Failure, "A database error occurred.");
@@ -121,13 +129,22 @@ namespace StoreSystem.Infrastructure.Persistence.Repo
         => await _Set.FindAsync(Id);
 
      
-        public async  Task<Result<IEnumerable<T>?>> GetAll()
+        public async  Task<Result<PagedResult<T?>>> GetAll(int pageNumber, int pageSize)
         {
              try
             {
-                List<T> items = await _Set.AsNoTracking().ToListAsync();
+                int totalItems = await _Set.CountAsync();
+                if (totalItems <= 0) return Errors.DataNotFoundError;
+                List<T> items = await _Set.AsNoTracking().Skip((pageNumber - 1) * pageSize).Take(pageSize).ToListAsync();
                 if (items.Count <= 0) return Errors.DataNotFoundError;
-                return items;   
+                
+                return new PagedResult<T?>
+                {
+                    Items = items,
+                    TotalItems = totalItems,
+                    PageNumber = pageNumber,
+                    PageSize = pageSize
+                };   
             }
             catch
             {

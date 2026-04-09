@@ -1,5 +1,6 @@
 
 using System.Text;
+using System.Threading.RateLimiting;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
@@ -12,6 +13,26 @@ using StudentManagement.Infrastructure.Presistence;
 using StudentManagement.Infrastructure.Shared;
 
 var builder = WebApplication.CreateBuilder(args);
+
+
+builder.Services.AddRateLimiter(options =>
+{
+    options.RejectionStatusCode = StatusCodes.Status429TooManyRequests;
+
+    options.AddPolicy("AuthLimiter", httpContext =>
+    {
+        var ip = httpContext.Connection.RemoteIpAddress?.ToString() ?? "unknown";
+
+        return RateLimitPartition.GetFixedWindowLimiter(
+            partitionKey: ip,
+            factory: _ => new FixedWindowRateLimiterOptions
+            {
+                PermitLimit = 5,
+                Window = TimeSpan.FromMinutes(1),
+                QueueLimit = 0
+            });
+    });
+});
 
 builder.Services.AddCors(options =>
 {
@@ -109,6 +130,17 @@ builder.Services.AddApplicationServiceRegistration(builder.Configuration);
 var app = builder.Build();
 app.UseHttpsRedirection();
 app.UseValidationExceptionHandler();
+app.UseRateLimiter();
+app.Use(async (context, next) =>
+{
+    await next();
+
+    if (context.Response.StatusCode == StatusCodes.Status429TooManyRequests)
+    {
+        await context.Response.WriteAsync("Too many login attempts. Please try again later.");
+    }
+});
+
 app.UseCors("AllowFrontend");
 
 

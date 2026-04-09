@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Linq.Expressions;
 using System.Threading.Tasks;
+using StudentManagement.Domain.common;
 using StudentManagement.Domain.Common;
 
 namespace StudentManagement.Domain.Interfaces
@@ -14,7 +15,7 @@ namespace StudentManagement.Domain.Interfaces
         Task<Result<bool>> Update(int Id, Action<T> UpdateAction);
         Task<Result<T?>> GetById(int Id);
         Task<Result<T?>> GetByCondition(Expression<Func<T, bool>> exp);
-        Task<Result<IEnumerable<T>?>> GetِAllByCondition(Expression<Func<T, bool>> exp);
-        Task<Result<IEnumerable<T>?>> GetAll();
+        Task<Result<PagedResult<T?>>> GetِAllByCondition(int pageNumber, int pageSize,Expression<Func<T, bool>> exp);
+        Task<Result<PagedResult<T?>>> GetAll(int pageNumber, int pageSize);
     }
 }

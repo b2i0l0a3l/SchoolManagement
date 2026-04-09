@@ -12,15 +12,14 @@ using Microsoft.IdentityModel.Tokens;
 using StudentManagement.Application.Behaviors;
 using StudentManagement.Application.Util;
 using StudentManagement.Application.Util.jwt;
+using StudentManagement.Domain.Interfaces;
 
 namespace StudentManagement.Application.Shared
 {
     public static class ApplicationServiceRegistration
     {
         public static void AddApplicationServiceRegistration(this IServiceCollection service,IConfiguration configuration)
-        {
-           
-            
+        {   
             service.AddMediatR(AppDomain.CurrentDomain.GetAssemblies());
             
             service.AddValidatorsFromAssembly(typeof(ApplicationAssemblyMarker).Assembly);
@@ -28,6 +27,7 @@ namespace StudentManagement.Application.Shared
             service.AddTransient(typeof(IPipelineBehavior<,>), typeof(ValidationBehavior<,>));
             
             service.AddScoped<IGenerateJwtToken, GenerateJwtTokenService>();
+            service.AddScoped<ITokenService, TokenService>();
         }
     }
 

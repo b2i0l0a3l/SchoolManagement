@@ -58,9 +58,9 @@ namespace StudentManagement.Api.Controllers
         [HttpGet("GetAllStudents")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status404NotFound)]
-        public async Task<IActionResult> GetAllStudents()
+        public async Task<IActionResult> GetAllStudents([FromQuery] int pageNumber = 1, [FromQuery] int pageSize = 10)
         {
-            var result = await _Mediator.Send(new GetAllStudentsRequest());
+            var result = await _Mediator.Send(new GetAllStudentsRequest { PageNumber = pageNumber, PageSize = pageSize });
             return ReturnResult(result);
         }
 

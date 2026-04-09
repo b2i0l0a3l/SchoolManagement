@@ -1,38 +1,37 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
 using MediatR;
 using StudentManagement.Application.Features.Messages.Request.Query.ClassQueryRequest;
 using StudentManagement.Domain.Common;
 using StudentManagement.Domain.Entities;
 using StudentManagement.Domain.Interfaces;
 using StudentManagement.Domain.Models;
+using StudentManagement.Domain.common;
 
 namespace StudentManagement.Application.Features.Messages.Handlers.Query.ClassQueryHandler
 {
-    public class GetAllClassesQueryHandler : IRequestHandler<GetAllClassesRequest,Result<IEnumerable<ClassModel>>>
+    public class GetAllClassesQueryHandler : IRequestHandler<GetAllClassesRequest, Result<PagedResult<ClassModel?>>>
     {
         private readonly IRepository<Class> _Repo;
-        public GetAllClassesQueryHandler(IRepository<Class> Repo)
-        {
-            _Repo = Repo;
-        }
+        public GetAllClassesQueryHandler(IRepository<Class> Repo) => _Repo = Repo;
 
-        public async Task<Result<IEnumerable<ClassModel>>> Handle(GetAllClassesRequest request, CancellationToken cancellationToken)
+        public async Task<Result<PagedResult<ClassModel?>>> Handle(GetAllClassesRequest request, CancellationToken cancellationToken)
         {
-            Result<IEnumerable<Class>?> result = await _Repo.GetAll();
-            if (!result.IsSuccess|| result.Value == null || !result.Value.Any())
+            var result = await _Repo.GetAll(request.PageNumber, request.PageSize);
+            if (!result.IsSuccess || result.Value == null)
                 return result.Error!;
 
-            IEnumerable<ClassModel> r = result.Value.Select(x => new ClassModel
+            var mapped = new PagedResult<ClassModel?>
             {
-                Id = x.Id,
-                ClassName = x.ClassName,
-                Year = x.Year
-            });
-            return Result<IEnumerable<ClassModel>>.Success(r);; 
+                Items = result.Value.Items.Select(x => x == null ? null : new ClassModel
+                {
+                    Id = x.Id,
+                    ClassName = x.ClassName,
+                    Year = x.Year
+                }),
+                TotalItems = result.Value.TotalItems,
+                PageNumber = result.Value.PageNumber,
+                PageSize = result.Value.PageSize
+            };
+            return Result<PagedResult<ClassModel?>>.Success(mapped);
         }
     }
 }

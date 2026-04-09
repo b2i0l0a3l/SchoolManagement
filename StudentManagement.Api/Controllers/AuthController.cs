@@ -4,8 +4,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.RateLimiting;
 using StudentManagement.Application.Features.Messages.Request.command.LoginRequest;
 using StudentManagement.Application.Features.Messages.Request.command.Register;
+using StudentManagement.Application.Features.Messages.Request.Command.Logout;
+using StudentManagement.Application.Features.Messages.Request.Command.RefreshTokenCommandRequest;
 
 namespace StudentManagement.Api.Controllers
 {
@@ -28,6 +31,7 @@ namespace StudentManagement.Api.Controllers
             return ReturnResult(result);
         }
         [HttpPost("Login")]
+        [EnableRateLimiting("AuthLimiter")]
         [ProducesResponseType(StatusCodes.Status200OK)]
         [ProducesResponseType(StatusCodes.Status400BadRequest)]
         [ProducesResponseType(StatusCodes.Status401Unauthorized)]
@@ -40,6 +44,24 @@ namespace StudentManagement.Api.Controllers
                 return Unauthorized(result.Error);
             }
             return Ok(result.Value);
+        }
+        [HttpPost("Refresh")]
+        [EnableRateLimiting("AuthLimiter")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Refresh([FromBody] RefreshTokenRequest request)
+        {
+            var result = await _Mediator.Send(request);
+            return ReturnResult(result);
+        }
+
+        [HttpPost("Logout")]
+        [ProducesResponseType(StatusCodes.Status200OK)]
+        [ProducesResponseType(StatusCodes.Status400BadRequest)]
+        public async Task<IActionResult> Logout([FromBody] LogoutRequest request)
+        {
+            var result = await _Mediator.Send(request);
+            return ReturnResult(result);
         }
     }
 }

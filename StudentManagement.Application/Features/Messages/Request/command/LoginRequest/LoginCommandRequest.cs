@@ -9,7 +9,7 @@ using StudentManagement.Domain.Models;
 
 namespace StudentManagement.Application.Features.Messages.Request.command.LoginRequest
 {
-    public class LoginCommandRequest : IRequest<Result<LoginModel>>
+    public class LoginCommandRequest : IRequest<Result<AuthResponse>>
     {
         [Required]
         [EmailAddress]
