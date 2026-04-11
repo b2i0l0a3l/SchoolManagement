@@ -15,10 +15,11 @@ const outfit = Outfit({
 
 import { Toaster } from "react-hot-toast";
 import QueryProvider from "@/providers/QueryProvider";
+import SideBar from "@/Components/Ui/Sidebar/sidebar";
 
 export const metadata: Metadata = {
-  title: "School Management System",
-  description: "Modern web application for managing schools",
+  title: "School Management System | نظام إدارة المدرسة",
+  description: "نظام حديث لإدارة المدارس - Modern web application for managing schools",
 };
 
 export default function RootLayout({
@@ -31,10 +32,25 @@ export default function RootLayout({
       lang="ar" dir="rtl"
       className={`${geistSans.variable} ${outfit.variable} antialiased h-full`}
     >
-      <body className="min-h-full flex flex-col font-sans bg-gray-50 text-slate-800">
+      <body className="min-h-full flex">
         <QueryProvider>
-            <Toaster position="top-center" />
-            {children}
+          <Toaster
+            position="top-center"
+            toastOptions={{
+              style: {
+                background: 'var(--background-secondary)',
+                color: 'var(--text-primary)',
+                border: '1px solid var(--card-border)',
+                borderRadius: 'var(--radius-md)',
+              },
+            }}
+          />
+          <div className="flex w-full">
+            <SideBar />
+            <main style={{ flex: 1, minHeight: '100vh', overflow: 'auto' }}>
+              {children}
+            </main>
+          </div>
         </QueryProvider>
       </body>
     </html>

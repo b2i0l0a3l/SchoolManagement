@@ -8,27 +8,22 @@ import { TableHeader } from "./TableHeader";
 import TableFooter from "./TableFooter";
 import { TableProps } from "@/Util/Types/TableProps";
 
-
-
 export default function Table<T>({
   data,
   columns,
   pageCount,
 }: TableProps<T>) {
-  
-
-    const table = useReactTable({
+  const table = useReactTable({
     data: data ?? [],
     columns: columns,
     getCoreRowModel: getCoreRowModel(),
     manualPagination: true,
     pageCount: pageCount,
   });
-  
 
   return (
-    <div>
-      <table border={1} cellPadding={10}>
+    <div className="table-wrapper">
+      <table>
         <TableHeader table={table} />
         <TableBody table={table} />
       </table>
@@ -36,4 +31,3 @@ export default function Table<T>({
     </div>
   );
 }
-

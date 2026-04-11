@@ -1,15 +1,44 @@
 import { usePaginationStore } from "@/Context/paginationStore";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 import { memo } from "react";
 
-function TableFooter({pageCount}: {pageCount: number}) {
-  const setPage = usePaginationStore((state)=> state.setPage)
-  const page = usePaginationStore((state)=> state.pageIndex)
+function TableFooter({ pageCount }: { pageCount: number }) {
+  const setPage = usePaginationStore((state) => state.setPage);
+  const page = usePaginationStore((state) => state.pageIndex);
+
+  const pages = Array.from({ length: pageCount }, (_, i) => i + 1);
+
   return (
-    <div className="flex items-center justify-between" style={{ marginTop: 10 }}>
-        <button onClick={() => setPage(page - 1)} disabled={page === 1}>Prev</button>
-        <span style={{ margin: "0 10px" }}>Page {page}</span>
-        <button onClick={() => setPage(page + 1)} disabled={page === 3}>Next</button>
+    <div className="pagination">
+      <button
+        className="pagination-btn"
+        onClick={() => setPage(page - 1)}
+        disabled={page === 1}
+        aria-label="الصفحة السابقة"
+      >
+        <ChevronRight size={16} />
+      </button>
+
+      {pages.map((p) => (
+        <button
+          key={p}
+          className={`pagination-btn ${page === p ? "active" : ""}`}
+          onClick={() => setPage(p)}
+        >
+          {p}
+        </button>
+      ))}
+
+      <button
+        className="pagination-btn"
+        onClick={() => setPage(page + 1)}
+        disabled={page === pageCount}
+        aria-label="الصفحة التالية"
+      >
+        <ChevronLeft size={16} />
+      </button>
     </div>
   );
 }
+
 export default memo(TableFooter);
